@@ -203,7 +203,7 @@ public class Server {
         else if(schema.getDimension().compareTo("distance")==0//EXCEPCION CUANDO BIN=1 U  2
                 ||schema.getDimension().compareTo("arrivalDelay")==0
                 ||schema.getDimension().compareTo("departureDelay")==0
-                ){
+                ||schema.getDimension().compareTo("duration")==0){
             String a,b;int min=0;int max=Integer.parseInt(bin);int tmp=0;String c="";
             TreeMap<String, Integer> histogramSorted = new TreeMap<>(new OrdenarAsc());
             histogramSorted.putAll(histogram.getMap());
