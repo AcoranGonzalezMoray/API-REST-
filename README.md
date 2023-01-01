@@ -39,22 +39,40 @@ retrasos).
   - Valores_Histogtrama_Eje_y = [...] (Contador de vuelos para cada valor de la dimension)
   
 ### 2. Dimension con Bin
-#### Ejemplo: ```http://localhost:8080/Flight/departureTime?bin=6``` donde le preguntamos por el departureTime de todos los vuelos de la base de datos.
+#### Ejemplo: ```http://localhost:8080/Flight/departureTime?bin=6``` donde le preguntamos por el departureTime de todos los vuelos de la base de datos separados por un bin (devuelve por rangos).
+
 #### Salida: 
 ```
-{"status":"SUCCESS","data":{"Dimension":"departureTime","Filtros":"null","Bin":"6","lenY":"5819811","Valores_Dimension_Eje_x":["00:00-06:00","06:00-12:00","12:00-18:00","18:00-23:59"],"Valores_Histogtrama_Eje_y":[317128,2142633,2103489,1256561]}}
+{"status":"SUCCESS","data":{"Dimension":"departureTime","Filtros":"null","Bin":"6","lenY":"5819811",
+"Valores_Dimension_Eje_x":["00:00-06:00","06:00-12:00","12:00-18:00","18:00-23:59"],
+"Valores_Histogtrama_Eje_y":[317128,2142633,2103489,1256561]}}
 ```
 
 ### 3. Dimension con Filtro
-#### Ejemplo: ```http://localhost:8080/Flight/arrivalTime?Filtros=dayOfWeek=FRIDAY,MONDAY;cancelled=true``` donde le preguntamos por el arrivalTime de todos aquellos vuelos de la base de datos que se hayan realizado un Viernes o un Lunes y que además estos hayan sido cancelados;
+#### Ejemplo: ```http://localhost:8080/Flight/departureTime?Filtros=dayOfWeek=FRIDAY,MONDAY;cancelled=true``` donde le preguntamos por el departureTime de todos aquellos vuelos de la base de datos que se hayan realizado un Viernes o un Lunes y que además estos hayan sido cancelados;
+
 #### Salida: 
 ```
-{"status":"SUCCESS","data":{"Dimension":"arrivalTime","Filtros":"dayOfWeek:FRIDAY,MONDAY;cancelled:true","Bin":"1","lenY":"37810","Valores_Dimension_Eje_x":["00:00-01:00","01:00-02:00","02:00-03:00","03:00-04:00","04:00-05:00","05:00-06:00","06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00","20:00-21:00","21:00-22:00","22:00-23:00","23:00-23:59"],"Valores_Histogtrama_Eje_y":[37810,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}}
+{"status":"SUCCESS","data":{"Dimension":"departureTime","Filtros":"dayOfWeek:FRIDAY,MONDAY;cancelled:true",
+"Bin":"1","lenY":"37810","Valores_Dimension_Eje_x":["00:00-01:00","01:00-02:00","02:00-03:00","03:00-04:00",
+"04:00-05:00","05:00-06:00","06:00-07:00","07:00-08:00","08:00-09:00","09:00-10:00","10:00-11:00","11:00-12:00",
+"12:00-13:00","13:00-14:00","14:00-15:00","15:00-16:00","16:00-17:00","17:00-18:00","18:00-19:00","19:00-20:00",
+"20:00-21:00","21:00-22:00","22:00-23:00","23:00-23:59"],
+"Valores_Histogtrama_Eje_y":[36497,4,2,0,2,48,87,60,55,35,48,44,50,89,93,85,107,124,83,80,70,80,44,23]}}
 ```
-- Tenga en cuenta que para especificar 
+- Tenga en cuenta que para especificar un Filtro se utiliza la expresión ```Filtros={parametro}={valor}``` si requiere de mas de un valor deben ir acompañado de una `,` por ejemplo ```Filtros={parametro}={valor1,valor2}```, si requiere de más parametros debe separarlos con `;`  por ejemplo ```Filtros={parametro}={valor1,valor2};{parametro}={valor}``` . Aquí tiene algunos ejemplos funcionales:
+  - 1. ```localhost:8080/Flight/arrivalTime?Filtros=diverted=true```
+  - 2. ```localhost:8080/Flight/arrivalDelay?Filtros=dayOfWeek=FRIDAY,MONDAY```
+  - 3. ```localhost:8080/Flight/distance?Filtros=dayOfWeek=FRIDAY,MONDAY;cancelled=false;diverted=true```
 
 ### 4. Dimension con Filtro y Bin
-#### Ejemplo: ```http://localhost:8080/Flight/departureTime``` donde le preguntamos por el departureTime de todos los vuelos de la base de datos.
+#### Ejemplo: ```http://localhost:8080/Flight/departureDelay?Filtros=dayOfWeek=WEDNESDAY,MONDAY;diverted=true&&bin=200``` donde le preguntamos por el departureDelay de todos los vuelos de la base de datos que se hayan realizado un Miercoles o un Lunes y que además estos hayan sido diverted, luego le especificamos un bin de 200 para una salida más amable (rangos de 200)
+
 #### Salida: 
-``````
+```
+{"status":"SUCCESS","data":{"Dimension":"departureDelay","Filtros":"dayOfWeek:WEDNESDAY,MONDAY;diverted:true"
+,"Bin":"200","lenY":"4341",
+"Valores_Dimension_Eje_x":["(-19)-(181)","(181)-(381)","(381)-(581)","(581)-(781)","(781)-(981)","(981)-(1030)"],
+"Valores_Histogtrama_Eje_y":[4201,125,12,1,1,1]}}
+```
 
