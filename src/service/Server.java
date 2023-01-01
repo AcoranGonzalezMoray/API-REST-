@@ -200,7 +200,7 @@ public class Server {
             }
             schema.setLenY(String.valueOf(tmp));    
         }
-        else if(schema.getDimension().compareTo("distance")==0//EXCEPCION CUANDO BIN=1 U  2
+        else if(schema.getDimension().compareTo("distance")==0//Problema con ultima iteracion
                 ||schema.getDimension().compareTo("arrivalDelay")==0
                 ||schema.getDimension().compareTo("departureDelay")==0
                 ||schema.getDimension().compareTo("duration")==0){
@@ -210,10 +210,10 @@ public class Server {
             int MAX = maxMap(histogram);
             min=minMap(histogram);
             max+=min;
-            for (int i = 1; i <=MAX; i++) {
+            for (int i = 0; i <=(MAX+MAX); i++) {
                 a=String.valueOf(min);
                 b=String.valueOf(max);
-                if(max>=MAX){c=String.valueOf(MAX);schema.addEje_x("("+a+")"+"-("+c+")");}
+                if(max>=MAX){c=String.valueOf(MAX);schema.addEje_x("("+a+")"+"-("+c+")");b+=1;}
                 else schema.addEje_x("("+a+")"+"-("+b+")");
                 int count=0;
                 for( String key : histogramSorted.keySet())if(ComprobarINT(key,a,b))count+=histogram.get(key); 
