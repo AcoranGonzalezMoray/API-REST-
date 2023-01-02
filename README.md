@@ -7,7 +7,7 @@ serializados en formato JSON.
 - En la petición se tendría que especificar, como parámetro inline o como parámetro de
 query:
   - Dimensión por la que se está realizando el histograma (p.e. hora de llegada, o
-retrasos). 
+retrasos).  
   - Filtros que se han aplicado en el cálculo del histograma (p.e. día de la semana).
   - Tamaño del bin (p.e. 6 horas cuando la dimensión es la hora de llegada)
 - El esquema del histograma debe tener como mínimo los siguientes campos:
