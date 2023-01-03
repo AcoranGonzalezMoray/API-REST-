@@ -12,7 +12,7 @@ retrasos).
   - Tamaño del bin (p.e. 6 horas cuando la dimensión es la hora de llegada)
 - El esquema del histograma debe tener como mínimo los siguientes campos:
   - Dimensión
-  - Filtros
+  - Filtros 
   - Valores de la dimensión (eje X)
   - Valores del histograma (eje Y)
 
